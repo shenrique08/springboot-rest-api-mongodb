@@ -2,6 +2,7 @@ package org.api.springbootrestapimongodb.resources;
 
 
 import org.api.springbootrestapimongodb.domain.User;
+import org.api.springbootrestapimongodb.dto.UserDTO;
 import org.api.springbootrestapimongodb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,9 @@ public class UserResource {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<UserDTO>> findAll() {
         List<User> list = service.findAll();
-        return ResponseEntity.ok().body(list);
+        List<UserDTO> userDTOList = list.stream().map(UserDTO::new).toList();
+        return ResponseEntity.ok().body(userDTOList);
     }
 }
