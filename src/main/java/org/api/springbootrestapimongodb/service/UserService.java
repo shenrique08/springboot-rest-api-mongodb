@@ -1,6 +1,5 @@
 package org.api.springbootrestapimongodb.service;
 
-import jakarta.servlet.Servlet;
 import org.api.springbootrestapimongodb.domain.User;
 import org.api.springbootrestapimongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class UserService {
     private final UserRepository repo;
 
     @Autowired
-    public UserService(UserRepository repo, Servlet servlet) {
+    public UserService(UserRepository repo) {
         this.repo = repo;
     }
 

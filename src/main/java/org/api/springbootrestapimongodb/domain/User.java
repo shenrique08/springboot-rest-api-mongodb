@@ -11,6 +11,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@Builder
 @Document(collection = "user")
 public class User implements Serializable {
 
@@ -21,7 +22,6 @@ public class User implements Serializable {
 
     public User() {}
 
-    @Builder
     public User(String id, String name, String email) {
         this.id = id;
         this.name = name;
