@@ -5,8 +5,10 @@ import org.api.springbootrestapimongodb.domain.Post;
 import org.api.springbootrestapimongodb.repository.PostRepository;
 import org.api.springbootrestapimongodb.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,5 +31,7 @@ public class PostService {
         return postRepository.findByTitleContainingIgnoreCase(title);
     }
 
-
+    public List<Post> fullSearch(String text, LocalDate minDate, LocalDate maxDate) {
+        return postRepository.fullSearch(text, minDate, maxDate);
+    }
 }
