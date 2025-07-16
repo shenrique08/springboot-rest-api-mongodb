@@ -41,10 +41,10 @@ public class UserService {
         repo.deleteById(id);
     }
 
-    public User update(String id, User userFromRequest) {
+    public void update(String id, User userFromRequest) {
         User existingUser = findById(id);
         updateData(existingUser, userFromRequest);
-        return repo.save(existingUser);
+        repo.save(existingUser);
     }
 
     private void updateData(User existingUser, User userFromRequest) {
