@@ -3,6 +3,7 @@ package org.api.springbootrestapimongodb.config;
 import org.api.springbootrestapimongodb.domain.Post;
 import org.api.springbootrestapimongodb.domain.User;
 import org.api.springbootrestapimongodb.dto.AuthorDTO;
+import org.api.springbootrestapimongodb.dto.CommentDTO;
 import org.api.springbootrestapimongodb.repository.PostRepository;
 import org.api.springbootrestapimongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,6 @@ public class Instantiation implements CommandLineRunner {
 
         userRepository.deleteAll();
         postRepository.deleteAll();
-
 
         User ana = User.builder().name("Ana Clara Souza").email("ana.souza@example.com").build();
         User lucas = User.builder().name("Lucas Oliveira Costa").email("lucas.costa@example.com").build();
@@ -68,6 +68,29 @@ public class Instantiation implements CommandLineRunner {
                 .title("Yep")
                 .body("Yep there")
                 .build();
+
+        CommentDTO comment1 = CommentDTO.builder()
+                .date(LocalDate.parse("12/02/2025", formatter))
+                .text("Have fun!")
+                .author(new AuthorDTO(juliana))
+                .build();
+
+        CommentDTO comment2 = CommentDTO.builder()
+                .date(LocalDate.parse("13/02/2025", formatter))
+                .text("Howdy to you as well!")
+                .author(new AuthorDTO(lucas))
+                .build();
+
+        CommentDTO comment3 = CommentDTO.builder()
+                .date(LocalDate.parse("14/02/2025", formatter))
+                .text("Good Morning!")
+                .author(new AuthorDTO(marcos))
+                .build();
+
+        post1.getComments().add(comment1);
+        post2.getComments().add(comment3);
+        post3.getComments().add(comment2);
+
         postRepository.saveAll(Arrays.asList(post1, post2, post3, post4));
 
         User anaFromDb = userRepository.findById(ana.getId()).orElseThrow();

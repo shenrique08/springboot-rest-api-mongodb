@@ -4,17 +4,19 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.api.springbootrestapimongodb.dto.AuthorDTO;
+import org.api.springbootrestapimongodb.dto.CommentDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
 @Getter
 @Setter
-@Builder
 @Document
 public class Post implements Serializable {
 
@@ -25,8 +27,12 @@ public class Post implements Serializable {
     private String body;
     private AuthorDTO author;
 
+    @Getter
+    private List<CommentDTO> comments = new ArrayList<>();
+
     public Post() {}
 
+    @Builder
     public Post(String id, LocalDate date, String title, String body, AuthorDTO author) {
         this.id = id;
         this.date = date;
