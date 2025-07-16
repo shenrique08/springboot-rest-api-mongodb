@@ -1,6 +1,7 @@
 package org.api.springbootrestapimongodb.service;
 
 import org.api.springbootrestapimongodb.domain.User;
+import org.api.springbootrestapimongodb.dto.UserDTO;
 import org.api.springbootrestapimongodb.service.exception.ObjectNotFoundException;
 import org.api.springbootrestapimongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,15 @@ public class UserService {
     public User findById(String id) {
         Optional<User> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found with ID: " + id));
+    }
+
+    public User insert(User obj) {
+        if (obj == null)
+            throw new IllegalArgumentException("User object cannot be null");
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO userDTO) {
+        return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
     }
 }
